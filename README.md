@@ -16,7 +16,7 @@ cd godo
 2. Build and install using Golang:
 
 ```bash
-go build -o godo .
+go build -o godo ./cmd
 ```
 
 3. Add `./godo` to your environment's PATH
