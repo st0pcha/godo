@@ -52,3 +52,12 @@ func LoadGodoFile() (map[string]string, error) {
 
 	return commands, nil
 }
+
+func FindCommand(commands map[string]string, command string) (string, error) {
+	script, ok := commands[command]
+	if !ok {
+		return "", fmt.Errorf("command not found: %s", command)
+	}
+
+	return script, nil
+}

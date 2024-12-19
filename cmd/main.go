@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/st0pcha/godo/pkg/executor"
 	"github.com/st0pcha/godo/pkg/loader"
 	"github.com/st0pcha/godo/pkg/utils"
 )
@@ -32,7 +33,14 @@ func main() {
 		exitWithMessage(err.Error())
 	}
 
-	fmt.Println(commands)
+	script, err := loader.FindCommand(commands, os.Args[1])
+	if err != nil {
+		exitWithMessage(err.Error())
+	}
+
+	if err := executor.Execute(script); err != nil {
+		exitWithMessage("failed to execute command")
+	}
 }
 
 func verifyArgs() {
