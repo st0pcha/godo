@@ -1,18 +1,35 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 
 	"github.com/st0pcha/godo/pkg/loader"
+	"github.com/st0pcha/godo/pkg/utils"
 )
 
 func main() {
+	helpFlag := flag.Bool("help", false, "show help message")
+	initFlag := flag.Bool("init", false, "create a .godo file")
+	flag.Parse()
+
+	if *helpFlag {
+		utils.ShowHelp()
+		os.Exit(1)
+	}
+	if *initFlag {
+		if err := loader.CreateGodoFile(); err != nil {
+			exitWithMessage(err.Error())
+		}
+		os.Exit(1)
+	}
+
 	verifyArgs()
 
 	commands, err := loader.LoadGodoFile()
 	if err != nil {
-		exitWithMessage("failed to load .godo file")
+		exitWithMessage(err.Error())
 	}
 
 	fmt.Println(commands)
@@ -20,7 +37,7 @@ func main() {
 
 func verifyArgs() {
 	if len(os.Args) < 2 {
-		exitWithMessage("no command provided")
+		exitWithMessage("no command provided. use 'godo --help' for more information")
 	}
 }
 

@@ -7,6 +7,18 @@ import (
 	"strings"
 )
 
+func CreateGodoFile() error {
+	file, err := os.Create(".godo")
+	if err != nil {
+		return fmt.Errorf("failed to create .godo file\n%w", err)
+	}
+	defer file.Close()
+
+	fmt.Println("[GODO] .godo file created")
+
+	return nil
+}
+
 func LoadGodoFile() (map[string]string, error) {
 	file, err := os.Open(".godo")
 	if err != nil {
