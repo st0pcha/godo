@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/st0pcha/godo/pkg/executor"
-	"github.com/st0pcha/godo/pkg/loader"
-	"github.com/st0pcha/godo/pkg/utils"
+	"github.com/st0pcha/godo/internal/executor"
+	"github.com/st0pcha/godo/internal/loader"
+	"github.com/st0pcha/godo/internal/utils"
 )
 
 func main() {
